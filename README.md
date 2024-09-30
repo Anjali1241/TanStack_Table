@@ -8,3 +8,4 @@ Currently, two official plugins are available:
 - [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
 -refer video-https://www.youtube.com/watch?v=CjqG277Hmgg
+-take reference: https://tanstack.com/table/latest/docs/framework/react/examples/pagination

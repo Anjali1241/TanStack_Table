@@ -9,7 +9,6 @@ import { useState, useMemo } from "react";
 
 function TaskTable() {
   const [data] = useState(jsonData);
-  const [pageSize, setPageSize] = useState(20);
   const columns = useMemo(
     () => [
       {
@@ -63,7 +62,6 @@ function TaskTable() {
             onChange={(e) => {
               // important
               table.setPageSize(Number(e.target.value));
-              // table.setPageIndex(0); // Reset to the first page when pageSize changes
             }}
           >
             {[10, 20, 30, 40, 50].map((pageSize) => (
