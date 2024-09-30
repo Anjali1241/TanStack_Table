@@ -1,6 +1,7 @@
 import {
   flexRender,
   getCoreRowModel,
+  getFilteredRowModel,
   getPaginationRowModel,
   useReactTable,
 } from "@tanstack/react-table";
@@ -9,6 +10,7 @@ import { useState, useMemo } from "react";
 
 function TaskTable() {
   const [data] = useState(jsonData);
+  const [globalFilter, setGlobalFilter] = useState([]);
   const columns = useMemo(
     () => [
       {
@@ -45,15 +47,25 @@ function TaskTable() {
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
     onPaginationChange: setPagination,
+    getFilteredRowModel: getFilteredRowModel(),
     //no need to pass pageCount or rowCount with client-side pagination as it is calculated automatically
     state: {
       pagination,
+      globalFilter,
     },
+    onGlobalFilterChange: setGlobalFilter,
   });
 
   return (
     <div>
       <div>
+        <div>
+          <input
+            value={globalFilter}
+            onChange={(e) => table.setGlobalFilter(String(e.target.value))}
+            placeholder="Search..."
+          />
+        </div>
         <label>
           Page Size:
           <select
