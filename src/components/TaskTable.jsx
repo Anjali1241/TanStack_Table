@@ -9,7 +9,7 @@ import { useState, useMemo } from "react";
 
 function TaskTable() {
   const [data] = useState(jsonData);
-
+  const [pageSize, setPageSize] = useState(20);
   const columns = useMemo(
     () => [
       {
@@ -35,12 +35,21 @@ function TaskTable() {
     ],
     []
   );
-
+  // Add state to handle pagination default value to 20
+  const [pagination, setPagination] = useState({
+    pageIndex: 0,
+    pageSize: 20,
+  });
   const table = useReactTable({
     data,
     columns,
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
+    onPaginationChange: setPagination,
+    //no need to pass pageCount or rowCount with client-side pagination as it is calculated automatically
+    state: {
+      pagination,
+    },
   });
 
   return (
